@@ -1,5 +1,5 @@
 import statistics
-#esta biblioteca me permite calcular la desviación estandar y otras funciones relacionadas a la estadística
+#Esta biblioteca me permite calcular la desviación estandar y otras funciones relacionadas a la estadística
 
 
 num_viviendas_manzana = int(input("Ingrese el número de viviendas en una manzana:"))
@@ -54,7 +54,24 @@ cantidad_habitantes= densidad_poblacional_total_km*Kilometros_region
 #calculamos la cantidad de habitantes
 areas_verdes_m = cantidad_habitantes*num_areas_persona
 #número de metros de áreas verdes necesarias
-areas_verdes_km= areas_verdes_m/1000000
+areas_verdes_km = areas_verdes_m/1000000
 
+
+
+def cantidad_parques(areas_verdes_m, aproximacion_vivienda, cantidad_viviendas_region, metros_region):
+    return ((metros_region-(aproximacion_vivienda*cantidad_viviendas_region)/areas_verdes_m))
+
+n = input("Hay niños en la región: si o no:")
+
+def juegos_parques(n):
+    if n=="si":
+        return "Habra juegos"
+    return "No habra juegos"
+
+    
+    
 print("Cantidad de kilometros cuadrados de áreas verdes:",areas_verdes_km)
+
+print("Cantidad de parques y especificaciones:",cantidad_parques(areas_verdes_m, aproximacion_vivienda,
+                                                                 cantidad_viviendas_region, metros_region),juegos_parques(n))
 
