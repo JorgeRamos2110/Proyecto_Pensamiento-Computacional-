@@ -1,7 +1,7 @@
 """
 Este proyecto nos da una aproximación
 al número de km de áreas verdes recomendadas
-por la OMS, tomando como parametros
+por la OMS, tomando como parámetros
 10 encuestas realizadas a personas de
 la región.
 """
@@ -9,7 +9,7 @@ la región.
 import statistics
 """
 Esta biblioteca extra me permite calcular
-la desviación estandar y
+la desviación estándar y
 otras funciones relacionadas a la estadística.
 """
 #Funciones
@@ -39,21 +39,20 @@ def aproximaciones(opcion, lista_num_habitantes, lista_m_vivienda):
     uso de biblioteca, listas)
     Recibe: el valor de la opcion, las listas lista_num_habitantes y
     lista_m_vivienda
-    Mediante un condicional if determina usando el valor de opcion si entra
-    en el primer segmento o en el segundo; si el valor de opcion es 1,
-    entra a la primer parte que toma la lista lista_num_habitantes y
-    utilizando la biblioteca extra calcula la desviación estandar de 
-    la lista, para despues calcular la media_habitantes al sumar los 
-    valores de la lista y dividirlo entre 10, posteriormente calcula 
-    la aproximacion_habitantes al sumar la desviacion_estandar a la 
-    media_habitantes, ingresa nuevamente a un condicional de acuerdo 
+    Mediante un condicional determina usando el valor de opcion si entra
+    en el primer segmento o en el segundo; si entra a la primera parte
+    toma la lista lista_num_habitantes y utilizando la biblioteca extra
+    calcula la desviación estándar de la lista, obtiene la media_habitantes
+    al sumar los valores de la lista y dividirlo entre 10, posteriormente
+    calcula  la aproximacion_habitantes al sumar los dos valores calculados
+    previamente, ingresa nuevamente a un condicional de acuerdo 
     al valor de la aproximación_habitantes en donde si esta es mayor 
     a 5 le resta una unidad y si es menor a 5 le suma una unidad;
-    ahora cuando la opcion es igual a 2 calcula la desviación estandar 
-    de la lista_m_vivienda con la biblioteca extra, para despues calcula 
+    ahora cuando entra al segundo segmento calcula la desviación
+    estándar de la lista_m_vivienda con la biblioteca extra, calcula 
     la media_vivienda al sumar los valores de la lista_m_habitantes y
-    dividrilo entre 10 y finalmente calcular la aproximacion_vivienda al
-    sumar la desviacion_estandar y la media_vivienda.
+    dividirlo entre 10 y finalmente calcular la aproximacion_vivienda al
+    sumar los dos valores obtenidos anteriormente.
     Devuelve: aproximacion_habitantes y aproximacion_vivienda
     """
     if (opcion==1):
@@ -106,13 +105,13 @@ def juegos_parques(n):
     """
     (Funciones, condicionales)
     Recibe: el valor string de n
-    Usando condicionales determina si habra juegos o no
+    Usando condicionales determina si habrá juegos o no
     de acuerdo al valor de n
-    Devuelve: "Habra juegos" o "No habra juegos"
+    Devuelve: "Habrá juegos" o "No habrá juegos"
     """
     if n=="si":
-        return "Habra juegos"
-    return "No habra juegos"
+        return "Habrá juegos"
+    return "No habrá juegos"
 
 
 def parques_manzana(areas_verdes_km, numero_manzanas_region):
@@ -125,25 +124,25 @@ def parques_manzana(areas_verdes_km, numero_manzanas_region):
     return (areas_verdes_km/numero_manzanas_region)
 """
 Esta función da una alternativa al acomodo
-de los km de áreas verdes ahora en relacion a las manzanas,
+de los km de áreas verdes ahora en relación a las manzanas,
 tomando los km de áreas verdes y
 el número de manzanas de la región.
 """
 
 #Constantes
 VAL_MANZANA = 6988.96
-#Medición urbanistica básica
+#Medición urbanística básica
 NUM_AREAS_PERSONA = 9
 #Numero de metros cuadrados recomendados por la OMS
 MEDIA_ANCHO_CALLE = 6
 #Medida media de calle
 AREA_IDEAL_PARQUE_KM =4.5
-#Medición urbanistica recomendada
+#Medición urbanística recomendada
 
 #Inputs
 num_viviendas_manzana = int(input("Número de viviendas en una manzana:"))
 
-kilometros_region= int(input("Kilometros que se buscan analizar:"))
+kilometros_region= int(input("Kilómetros que se buscan analizar:"))
 
 n = input("Hay niños en la región: si o no:")
 
@@ -155,7 +154,7 @@ while len(lista_num_habitantes)<10:
     lista_num_habitantes.append(num_habitantes)
 """
 El usuario nos da la información de 10
-encuenstas sobre el número de habitantes,
+encuestas sobre el número de habitantes,
 los cuales colocamos en listas para su mejor manejo.
 """
 lista_m_vivienda = []
@@ -164,7 +163,7 @@ while len(lista_m_vivienda)<10:
     lista_m_vivienda.append(m_vivienda)
 """
 El usuario nos da la información de 10
-encuenstas sobre el tamaño de las viviendas,
+encuestas sobre el tamaño de las viviendas,
 los cuales colocamos en listas para su mejor manejo.
 """
 
@@ -178,14 +177,14 @@ numero_manzanas_region = numero_manzanas_region(metros_region, VAL_MANZANA,
 
 aproximacion_vivienda = aproximaciones(2, lista_num_habitantes,
                                        lista_m_vivienda)
-aproximacion_habitantes = aproximaciones(1,lista_num_habitantes,
+aproximacion_habitantes = aproximaciones(1, lista_num_habitantes,
                                          lista_m_vivienda)
 
 areas_verdes_km = areas_verdes_km(aproximacion_habitantes,
                                   aproximacion_vivienda,
                                   metros_region, NUM_AREAS_PERSONA)
 
-cantidad_parques = cantidad_parques(AREA_IDEAL_PARQUE_KM,areas_verdes_km)
+cantidad_parques = cantidad_parques(AREA_IDEAL_PARQUE_KM, areas_verdes_km)
 
 parques_manzana = parques_manzana(areas_verdes_km,
                                   numero_manzanas_region)
