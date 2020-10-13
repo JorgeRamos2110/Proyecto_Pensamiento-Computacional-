@@ -1,5 +1,17 @@
+"""
+Este proyecto nos da una aproximación
+al número de km de áreas verdes recomendadas
+por la OMS, tomando como parametros
+10 encuestas realizadas a personas de
+la región.
+"""
+
 import statistics
-#Esta biblioteca extra me permite calcular la desviación estandar y otras funciones relacionadas a la estadística
+"""
+Esta biblioteca extra me permite calcular
+la desviación estandar y
+otras funciones relacionadas a la estadística.
+"""
 
 VAL_MANZANA = 6988.96
 #Medición urbanistica básica
@@ -13,18 +25,25 @@ AREA_IDEAL_PARQUE_KM =4.5
 num_viviendas_manzana = int(input
                         ("Ingrese el número de viviendas en una manzana:"))
 #Nos da mediante in input el número de viviendas en una manzana
+
 kilometros_region= int(input("Ingrese los kilometros que se buscan analizar:"))
 #Los kilómetros totales a analizar
+
+n = input("Hay niños en la región: si o no:")
+#un input que nos dicta si hay niños o no
+
 lista_num_habitantes = []
 while len(lista_num_habitantes)<10:
     num_habitantes=int(input("Ingrese el número de habitantes por casa:"))
     lista_num_habitantes.append(num_habitantes)
 #Valores del número de habitantes ordenados en listas
+
 lista_m_vivienda = []
 while len(lista_m_vivienda)<10:
     m_vivienda=int(input("Ingrese los m**2 de la vivienda:"))
     lista_m_vivienda.append(m_vivienda)
 #Valores del tamaño de viviendas ordenados en listas
+
 metros_region = kilometros_region*1000000
 
 def numero_manzanas_region(metros_region, VAL_MANZANA, MEDIA_ANCHO_CALLE):
@@ -33,15 +52,19 @@ def numero_manzanas_region(metros_region, VAL_MANZANA, MEDIA_ANCHO_CALLE):
     numero_manzanas_lado = (lado_region)/(MEDIA_ANCHO_CALLE+lado_manzana)
     numero_manzanas_region = numero_manzanas_lado**2
     return numero_manzanas_region
-#Esta función sirve para calcular el numero_manzanas_region del área que se estudia 
-numero_manzanas_region = numero_manzanas_region(metros_region, VAL_MANZANA,
-                                                MEDIA_ANCHO_CALLE)
+"""
+Esta función me permite calcular el número de
+manzanas de una región a partir de
+la región estudiada, el tamaño de una manzana
+y el tamaño medio urbanistico de una calle.
+"""
 
 def aproximaciones (opcion, lista_num_habitantes, lista_m_vivienda):
     if (opcion==1):
         desviación_estandar_habitantes = statistics.stdev(lista_num_habitantes)
         media_habitantes = (sum(lista_num_habitantes))/10
-        aproximacion_habitantes = desviación_estandar_habitantes+media_habitantes
+        aproximacion_habitantes = (desviación_estandar_habitantes+
+                                   media_habitantes)
         if (aproximacion_habitantes < 5):
             aproximacion_habitantes=aproximacion_habitantes+1
             return aproximacion_habitantes
@@ -53,43 +76,86 @@ def aproximaciones (opcion, lista_num_habitantes, lista_m_vivienda):
         media_vivienda = (sum(lista_num_habitantes))/10
         aproximacion_vivienda = desviación_estandar_vivienda+media_vivienda
         return aproximacion_vivienda
-#Esta función se utiliza para calcular las aproximaciones de los habitantes y de las viviendas usando las listas
-
-aproximacion_vivienda = aproximaciones(2, lista_num_habitantes, lista_m_vivienda)
-aproximacion_habitantes = aproximaciones(1,lista_num_habitantes, lista_m_vivienda)
-#Asignamos variables a los resultados de nuestras funciones
+"""
+Esta función se utiliza para calcular
+las aproximaciones de los habitantes y
+de las viviendas usando las listas anteriormente
+realizadas, aquí es donde utilizo la biblioteca de
+stadistics para poder calcular la desviación
+estandar de una lista entera.
+"""
 
 def areas_verdes_km(aproximacion_habitantes, aproximacion_vivienda,
                     metros_region, NUM_AREAS_PERSONA):
-    densidad_poblacional_relativa = aproximacion_habitantes/aproximacion_vivienda
+    densidad_poblacional_relativa = (aproximacion_habitantes/
+                                     aproximacion_vivienda)
     cantidad_habitantes= densidad_poblacional_relativa*metros_region
     areas_verdes_m = cantidad_habitantes*NUM_AREAS_PERSONA
     return areas_verdes_m/1000000
 
-areas_verdes_km = areas_verdes_km(aproximacion_habitantes, aproximacion_vivienda,
-                    metros_region, NUM_AREAS_PERSONA)
-#Asignamos una variable al resultado de la función 
+"""
+Esta función nos da la cantidad de km de áreas verdes
+necesarias para el espacio dado por el usuario,
+utilizando las aproximaciones dadas por la funcion anterior,
+el área estudiada y la recomendación de la OMS.
+"""
 
 def cantidad_parques(AREA_IDEAL_PARQUE_KM,areas_verdes_km):
     return (areas_verdes_km/AREA_IDEAL_PARQUE_KM)
-#Esta función calcula la cantidad de parques tomando el area ideal y los km de área
-cantidad_parques = cantidad_parques(AREA_IDEAL_PARQUE_KM,areas_verdes_km)
-n = input("Hay niños en la región: si o no:")
+"""
+Esta función calcula la cantidad de parques tomando el area ideal
+y los km de área.
+"""
 
 def juegos_parques(n):
     if n=="si":
         return "Habra juegos"
     return "No habra juegos"
-#Esta función nos dice si habra juegos o no 
+"""
+Esta función nos dice si habra juegos o no,
+a partir de una input hecho al usuario.
+"""
+
 def parques_manzana(areas_verdes_km, numero_manzanas_region):
     return (areas_verdes_km/numero_manzanas_region)
-#Esta función da una alternativa al acomodo de los km de áreas verdes ahora en relacion a las manzanas 
-parques_manzana = parques_manzana(areas_verdes_km, numero_manzanas_region)
+"""
+Esta función da una alternativa al acomodo
+de los km de áreas verdes ahora en relacion a las manzanas,
+tomando los km de áreas verdes y
+el número de manzanas de la región.
+"""
+numero_manzanas_region = numero_manzanas_region(metros_region, VAL_MANZANA,
+                                                MEDIA_ANCHO_CALLE)
+#Damos una variable al resultado de la función numero_manzanas_region
 
-print("Cantidad de kilómetros cuadrados de áreas verdes:",areas_verdes_km,",",
-      "Cantidad de parques:",cantidad_parques,",",
-      "Especificaciones:",juegos_parques(n),",", "Km de áreas verdes por manzana:",
+aproximacion_vivienda = aproximaciones(2, lista_num_habitantes,
+                                       lista_m_vivienda)
+aproximacion_habitantes = aproximaciones(1,lista_num_habitantes,
+                                         lista_m_vivienda)
+#Asignamos variables a los resultados de nuestras función aproximaciones
+
+areas_verdes_km = areas_verdes_km(aproximacion_habitantes,
+                                  aproximacion_vivienda,
+                                  metros_region, NUM_AREAS_PERSONA)
+#Asignamos una variable al resultado de la función areas_verdes_km
+
+cantidad_parques = cantidad_parques(AREA_IDEAL_PARQUE_KM,areas_verdes_km)
+#Asignamos una variable al resultado de la función cantidad_parques
+
+parques_manzana = parques_manzana(areas_verdes_km,
+                                  numero_manzanas_region)
+#Damos una variable al resultado de la función
+
+print("Cantidad de kilómetros cuadrados de áreas verdes:",
+      areas_verdes_km,",", "Cantidad de parques:",
+      cantidad_parques,",","Especificaciones:",
+      juegos_parques(n),",", "Km de áreas verdes por manzana:",
       parques_manzana)
-#Imprimimos los km de áreas verdes, la cantidad de parques y las especificaciones
+"""
+Finalmente imprimimos los km de áreas verdes,
+la cantidad de parques con la medida urbanística recomendada,
+las especificaciones y
+la cantidad de parques por manzanas.
+"""
 
 
