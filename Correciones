@@ -1,0 +1,11 @@
+Sub-Competencia: 
+El estilo cumple con las normas y estándares enunciadas en el documento de PEP 8
+
+Error original:
+No había colocado las funciones en la parte superior y no tenía el formato adecuado para comentar el uso y funcionamiento de mis funciones.
+
+Cambio realizado:
+Coloque todas las funciones en la parte superior y use la triple comilla para comentar mis funciones
+
+Líneas de código donde se ve la corrección:
+16 a 124  Funciones
